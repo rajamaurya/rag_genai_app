@@ -1,6 +1,6 @@
 # 🤖 RAG GenAI App
 
-> A full-stack, open-source GenAI app for document-based chat using Hugging Face models and FAISS vector store. Built with **FastAPI**, **LangChain**, **FAISS**, and **React + Vite**.
+> A full-stack, open-source GenAI app for document-based chat using Hugging Face models and FAISS vector store. Built with **FastAPI**, **LangChain**, **FAISS**, and **React**.
 
 ---
 
@@ -12,7 +12,7 @@
 
 ## 🔧 Tech Stack
 
-- **Frontend**: React, Vite, TailwindCSS
+- **Frontend**: React
 - **Backend**: FastAPI, LangChain, Python
 - **Embeddings**: Hugging Face (`all-MiniLM-L6-v2`)
 - **Vector Store**: FAISS
