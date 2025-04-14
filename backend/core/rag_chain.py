@@ -1,21 +1,28 @@
 from langchain.vectorstores import FAISS
-from langchain.embeddings import OpenAIEmbeddings
+from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.chains import ConversationalRetrievalChain
-from langchain.llms import OpenAI
+from ollama_streaming_wrapper import OllamaStreamingLLM
+#from langchain.llms import OpenAI
+from langchain.llms import Ollama
 # retrieve_rag_chain
 def get_rag_chain():
-    db = FAISS.load_local("faiss_index", OpenAIEmbeddings())
+    db = FAISS.load_local("faiss_index", HuggingFaceEmbeddings(), allow_dangerous_deserialization=True) # vector store
     retriever = db.as_retriever(search_type="similarity", k= 3)
     chain = ConversationalRetrievalChain.from_llm(
-        llm = OpenAI(temarature=0, streaming=True),
-        retriever = retriever
+        llm = OllamaStreamingLLM(model="mistral", temperature=0.0),
+        retriever = retriever,
+        return_source_documents=True  # optional
     )
     return chain
  # get answers in stream
 def get_answers_stream(query):
     # get rag chain
     chain = get_rag_chain()
-    response = chain.stream({"question": query})
+    print("Calling chain with:")
+    print(f"question: {query}")
+    print("chat_history: []")
+    response = chain.stream({"question": query, "chat_history": []})
+    print("RESPONSE :::: ", response)
     for chunk in response:
         ans = chunk['answer']
         if "source_documents" in chunk:

@@ -1,5 +1,5 @@
 from langchain.vectorstores import FAISS
-from langchain.embeddings import OpenAIEmbeddings
+from langchain.embeddings import HuggingFaceEmbeddings
 from core.vector_store import get_vector_store
 from dotenv import load_dotenv
 load_dotenv()
@@ -15,7 +15,7 @@ def embed_and_store(chunks):
         db.add_documents(chunks)
         db.save_local("faiss_index")
     else:
-        db = FAISS.from_documents(chunks, OpenAIEmbeddings())
+        db = FAISS.from_documents(chunks, HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2"))
         db.save_local("faiss_index")
 
 

@@ -1,0 +1,7 @@
+Run the Whole App
+    docker-compose up --build
+Then visit: http://localhost:5173
+
+Run a model locally:
+    ollama run mistral
+

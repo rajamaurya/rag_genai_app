@@ -7,3 +7,6 @@ faiss-cpu
 python-dotenv
 tiktoken
 PyPDF2
+python-multipart
+sentence-transformers
+pip install llama-cpp-python

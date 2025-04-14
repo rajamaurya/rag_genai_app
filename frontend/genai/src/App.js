@@ -24,7 +24,7 @@ function App() {
   }
   const ask = async () => {
    setLoading(true)
-    const res = await axios.post("http://localhost:8000/ask", query, {
+    const res = await axios.post("http://localhost:8000/ask", { "question": query}, {
       headers: {
         "Content-Type": "application/json",
       },
