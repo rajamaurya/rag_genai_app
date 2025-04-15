@@ -28,7 +28,9 @@ function App() {
       headers: {
         "Content-Type": "application/json",
       },
+      timeout: 1000000
     });
+    console.log("RES::: ", res)
     const readerStream = res.body.reader();
     const decoder = new TextDecoder();
     let result = '';
@@ -37,8 +39,8 @@ function App() {
       if (done) break;
       const chunks = decoder.decode(value)
       result += chunks
-      setAnswer(prev => prev + result);
     }
+    setAnswer((prev) => prev + result);
    setLoading(false);
   }
   return (

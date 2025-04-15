@@ -54,7 +54,8 @@ agent = initialize_agent(
 @app.post("/ask")
 def ask(query: Query):
     reformulate_question(query.question)
-    return StreamingResponse(agent.run(generateAnswerChunk(query)), media_type="text/plain")
+    full_answer = "".join(chunk for chunk in generateAnswerChunk(query))
+    return StreamingResponse(agent.run(full_answer), media_type="text/plain")
 
 
 def generateAnswerChunk(query):
